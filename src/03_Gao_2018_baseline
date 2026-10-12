@@ -1,0 +1,55 @@
+import pandas as pd
+
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score
+)
+
+train = pd.read_csv(
+    "data/VUA/VUA_formatted_train.csv",
+    encoding="latin1"
+)
+
+val = pd.read_csv(
+    "data/VUA/VUA_formatted_val.csv",
+    encoding="latin1"
+)
+
+test = pd.read_csv(
+    "data/VUA/VUA_formatted_test.csv",
+    encoding="latin1"
+)
+
+# Gao et al. combine train + validation
+train_full = pd.concat(
+    [train, val],
+    ignore_index=True
+)
+
+verb_metaphor_rate = (
+    train_full
+    .groupby("verb")["label"]
+    .mean()
+)
+
+def predict(verb):
+    if verb in verb_metaphor_rate.index:
+        return 1 if verb_metaphor_rate[verb] > 0.5 else 0
+
+    return 0
+
+y_true = test["label"]
+y_pred = test["verb"].apply(predict)
+
+accuracy = accuracy_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred, zero_division=0)
+recall = recall_score(y_true, y_pred, zero_division=0)
+f1 = f1_score(y_true, y_pred, zero_division=0)
+
+print("Gao 2018 Lexical Baseline")
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1:", f1)

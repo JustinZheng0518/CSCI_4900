@@ -1,0 +1,40 @@
+experiment:
+  name: gao2018_cls_vua
+  paper: "Gao et al. 2018 - Neural Metaphor Detection in Context"
+
+data:
+  train_path: data/VUA/VUA_formatted_train.csv
+  val_path: data/VUA/VUA_formatted_val.csv
+  test_path: data/VUA/VUA_formatted_test.csv
+  encoding: latin1
+
+embeddings:
+  glove:
+    enabled: true
+    dimension: 300
+    source: glove.840B.300d
+  elmo:
+    enabled: true
+    dimension: 1024
+  target_index_embedding:
+    dimension: 50
+
+model:
+  type: bilstm_attention_classifier
+  hidden_size: 300
+  bidirectional: true
+
+training:
+  optimizer: sgd
+  learning_rate: null
+  dropout: null
+  batch_size: null
+  epochs: null
+  early_stopping: true
+
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1
