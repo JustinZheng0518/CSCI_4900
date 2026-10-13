@@ -1,38 +1,37 @@
 experiment:
-  name: gao2018_cls_vua
-  paper: "Gao et al. 2018 - Neural Metaphor Detection in Context"
+  name: gao2018_cls_no_elmo
+  description: "Gao et al. (2018) VUA verb classification model without ELMo"
 
 data:
   train_path: data/VUA/VUA_formatted_train.csv
   val_path: data/VUA/VUA_formatted_val.csv
   test_path: data/VUA/VUA_formatted_test.csv
   encoding: latin1
+  max_sequence_length: 100
 
 embeddings:
-  glove:
-    enabled: true
-    dimension: 300
-    source: glove.840B.300d
-  elmo:
-    enabled: true
-    dimension: 1024
-  target_index_embedding:
-    dimension: 50
+  glove_dim: 300
+  target_indicator_dim: 50
+  use_elmo: false
 
 model:
-  type: bilstm_attention_classifier
+  type: bilstm_attention
   hidden_size: 300
+  num_layers: 1
   bidirectional: true
+  input_dropout: 0.3
+  output_dropout: 0.2
 
 training:
-  optimizer: sgd
-  learning_rate: null
-  dropout: null
-  batch_size: null
-  epochs: null
-  early_stopping: true
+  batch_size: 64
+  optimizer: SGD
+  learning_rate: 0.01
+  momentum: 0.9
+  epochs: 20
+  seed: 42
 
 evaluation:
+  primary_metric: f1
   metrics:
     - accuracy
     - precision
