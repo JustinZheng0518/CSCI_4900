@@ -11,3 +11,6 @@ __pycache__/
 
 # macOS system files
 .DS_Store
+
+# Generated preprocessing artifacts
+data/processed/gao2018/
