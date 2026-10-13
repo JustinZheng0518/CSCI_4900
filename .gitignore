@@ -13,4 +13,6 @@ __pycache__/
 .DS_Store
 
 # Generated preprocessing artifacts
-data/processed/gao2018/
+data/processed/gao2018/embeddings/Glove/*.txt
+embeddings/Glove/*.zip
+data/processed/gao2018/glove_matrix.npy
