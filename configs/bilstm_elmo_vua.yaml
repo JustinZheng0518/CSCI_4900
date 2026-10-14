@@ -1,0 +1,39 @@
+experiment:
+  name: gao2018_bilstm_elmo
+  description: "Gao-style BiLSTM + GloVe + ELMo + target indicator on VUA"
+
+data:
+  train_path: data/VUA/VUA_formatted_train.csv
+  val_path: data/VUA/VUA_formatted_val.csv
+  test_path: data/VUA/VUA_formatted_test.csv
+  encoding: latin1
+  max_sequence_length: 200
+
+embeddings:
+  glove_path: data/processed/gao2018/glove_matrix.npy
+  target_indicator_path: data/processed/gao2018/target_indicator.npy
+
+  elmo_train_path: embeddings/ELMo/elmo/VUA_train.hdf5
+  elmo_val_path: embeddings/ELMo/elmo/VUA_val.hdf5
+  elmo_test_path: embeddings/ELMo/elmo/VUA_test.hdf5
+
+model:
+  glove_dim: 300
+  elmo_dim: 1024
+  target_indicator_dim: 50
+
+  hidden_size: 300
+
+  input_dropout: 0.1
+  output_dropout: 0.1
+
+  use_glove: true
+  use_elmo: true
+  use_target_indicator: true
+
+training:
+  batch_size: 64
+  learning_rate: 0.01
+  momentum: 0.9
+  epochs: 20
+  seed: 42

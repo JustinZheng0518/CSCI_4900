@@ -2,3 +2,5 @@ model,dataset,split,accuracy,precision,recall,f1,notes
 majority,VUA,test,0.700153,0.000000,0.000000,0.000000,"always predicts literal"
 lexical_train_only,VUA,test,0.764005,0.664908,0.429302,0.521739,"train split only; >=0.5; unseen verbs literal"
 gao2018_lexical,VUA,test,0.764516,0.678977,0.407155,0.509052,"strict Gao et al. 2018 reproduction; train+val; >0.5; unseen verbs literal"
+
+Gao2018_BiLSTM_GloVe_NoELMo,0.7572,0.6139,0.5128,0.5588,19

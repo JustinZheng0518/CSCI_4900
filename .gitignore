@@ -14,3 +14,6 @@ __pycache__/
 
 # Generated preprocessing artifacts
 data/processed/gao2018/glove_matrix.npy
+
+# Precomputed ELMo embeddings
+embeddings/ELMo/
